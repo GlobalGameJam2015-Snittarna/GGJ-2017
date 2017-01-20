@@ -17,7 +17,7 @@ public class AssetManager {
 		textureRegions = new HashMap<String, TextureRegion>();
 		spriteSheet = new Texture("spritesheet.png");
 		
-		for (String s : Gdx.files.internal("textures/data.gd").readString().split("\n")) {
+		for (String s : Gdx.files.internal("textures.txt").readString().split("\n")) {
 			String[] vals = s.split(",");
 			textureRegions.put(vals[0], new TextureRegion(spriteSheet, Integer.parseInt(vals[1]), Integer.parseInt(vals[2]), Integer.parseInt(vals[3]), Integer.parseInt(vals[4])));
 		}
@@ -32,4 +32,8 @@ public class AssetManager {
 	 * the spritesheet containing all textures.
 	 */
 	private static Texture spriteSheet;
+	
+	public static TextureRegion getTexture(String name) {
+		return textureRegions.get(name);
+	}
 }
