@@ -7,27 +7,59 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Game extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+	/**
+	 *  used for rendering the scene.
+	 */
+	private SpriteBatch gameBatch; 
+	 /**
+	 *  for rendering ui (on top of the scene)
+	 **/
+	private SpriteBatch uiBatch;
 	
+	/**
+	 * the currently active scene being updated and drawn.
+	 */
+	private Scene currentScene;
+	
+	public Scene getCurrentScene() {
+		return currentScene;
+	}
+
+	/**
+	 * sets a new scene and notifies both the old one and new one.
+	 * @param currentScene
+	 * @see Scene#onLeave()
+	 * @see Scene#onResume()
+	 */
+	public void setCurrentScene(Scene currentScene) {
+		currentScene.onLeave();
+		this.currentScene = currentScene;
+		currentScene.onResume();
+	}
+
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		uiBatch = new SpriteBatch();
+		gameBatch = new SpriteBatch();
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		
+		gameBatch.begin();
+		currentScene.drawGame(gameBatch);
+		gameBatch.end();
+		
+		uiBatch.begin();
+		currentScene.drawUi(uiBatch);
+		uiBatch.end();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+		gameBatch.dispose();
+		uiBatch.dispose();
 	}
 }
