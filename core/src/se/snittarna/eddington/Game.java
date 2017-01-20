@@ -41,6 +41,10 @@ public class Game extends ApplicationAdapter {
 	public void create () {
 		uiBatch = new SpriteBatch();
 		gameBatch = new SpriteBatch();
+		
+		AssetManager.load();
+		
+		System.out.println(AssetManager.getTexture("test"));
 	}
 
 	@Override
