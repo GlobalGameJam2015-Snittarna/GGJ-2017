@@ -6,6 +6,10 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class Animation extends Sprite {
+	private int maxFrame;
+	private int minFrame;
+	private int currentFrame;
+	
 	public Animation(Sprite sprite) {
 		super(sprite);
 	}
@@ -17,5 +21,9 @@ public class Animation extends Sprite {
 	
 	public Animation(Texture sprite) {
 		super(sprite);
+	}
+	
+	public void animate() {
+		
 	}
 }
