@@ -19,12 +19,14 @@ public class SquidArm extends GameObject {
 	private boolean goUp;
 	private boolean attacking;
 	
-	public SquidArm(Vector2 position, Vector2 size, Animation sprite) {
-		super(position, size, sprite);
+	public SquidArm(Vector2 position) {
+		super(position, new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("hand"))));
 	}
 	
 	public void update(float dt) {
 		if(!attacking) this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, BASE_LEVEL, 0.01f)));
+		attacking = true;
+		tease();
 		super.update(dt);
 	}
 	
@@ -37,15 +39,15 @@ public class SquidArm extends GameObject {
 	}
 	
 	public void tease() {
-		float highTease = BASE_LEVEL + 0.5f;
-		float lowTease = BASE_LEVEL - 0.5f ;
+		float highTease = BASE_LEVEL + 8f;
+		float lowTease = BASE_LEVEL - 8f;
 		
-		if(goUp) {
-			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, highTease, 0.01f)));
-			goUp = (currentLevel >= highTease-0.01f); 
+		if(!goUp) {
+			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, highTease, 0.08f)));
+			goUp = (this.getPosition().cpy().y >= highTease-0.1f); 
 		} else {
-			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, lowTease, 0.01f)));
-			goUp = (currentLevel <= lowTease+0.01f); 
+			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, lowTease, 0.08f)));
+			goUp = !(this.getPosition().cpy().y <= lowTease+0.1f); 
 		}
 	}
 	
