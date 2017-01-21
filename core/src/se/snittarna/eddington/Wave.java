@@ -47,7 +47,7 @@ public class Wave extends GameObject {
 			if (x < getPosition().x + tip.x) {
 				return MathUtils.lerp(GameScene.getOceanLevel(step), GameScene.getOceanLevel(step) + tip.y, (x - getPosition().x) / tip.x);
 			} else {
-				return MathUtils.lerp(GameScene.getOceanLevel(step) + tip.y, GameScene.getOceanLevel(step), (x - getPosition().x) / tip.x);
+				return MathUtils.lerp(GameScene.getOceanLevel(step) + tip.y, GameScene.getOceanLevel(step), (x - getPosition().x) / (getSize().x - tip.x + getPosition().x));
 			}
 		}
 	}

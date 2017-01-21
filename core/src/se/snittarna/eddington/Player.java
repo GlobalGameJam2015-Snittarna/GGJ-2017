@@ -75,7 +75,7 @@ public class Player extends GameObject {
 			if (step < 1) step += 1;
 		}
 
-		if (getPosition().y < GameScene.getOceanLevel(step)) {
+		if (getPosition().y < ((GameScene)getScene()).getDynamicOceanLevel(getPosition().x, step)) {
 			/**
 			 * keep depth
 			 */

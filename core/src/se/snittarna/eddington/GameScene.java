@@ -22,6 +22,7 @@ public class GameScene extends Scene {
 			if (g instanceof Wave) {
 				float d = ((Wave)g).getHeightAt(x, depth);
 				System.out.println("wave, h = " + d);
+				System.out.println(getOceanLevel(depth));
 				if (d != 0) return d;
 			}
 		}
