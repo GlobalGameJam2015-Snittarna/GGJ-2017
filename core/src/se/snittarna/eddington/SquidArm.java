@@ -11,7 +11,7 @@ public class SquidArm extends GameObject {
 	private float currentLevel;
 	private float extendSpeed;
 	
-	private final float BASE_LEVEL = 1;
+	private final float BASE_LEVEL = GameScene.getOceanLevel(3);
 	private final float MAX_EXTENSION = 100f;
 	
 	private Sprite arm;
@@ -38,14 +38,14 @@ public class SquidArm extends GameObject {
 	
 	public void tease() {
 		float highTease = BASE_LEVEL + 0.5f;
-		float lowTease = BASE_LEVEL + 0.5f;
+		float lowTease = BASE_LEVEL - 0.5f ;
 		
 		if(goUp) {
-			MathUtils.lerp(currentLevel, highTease, 0.1f);
-			goUp = (currentLevel >= highTease-0.1f); 
+			MathUtils.lerp(currentLevel, highTease, 0.01f);
+			goUp = (currentLevel >= highTease-0.01f); 
 		} else {
-			MathUtils.lerp(currentLevel, lowTease, 0.1f);
-			goUp = (currentLevel <= lowTease+0.1f); 
+			MathUtils.lerp(currentLevel, lowTease, 0.01f);
+			goUp = (currentLevel <= lowTease+0.01f); 
 		}
 	}
 	
