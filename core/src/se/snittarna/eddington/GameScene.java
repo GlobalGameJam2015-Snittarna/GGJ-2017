@@ -18,15 +18,16 @@ public class GameScene extends Scene {
 	 * @return the depth at x, including waves.
 	 */
 	public float getDynamicOceanLevel(float x, int depth) {
+		float dist = getOceanLevel(depth);
 		for (GameObject g : getObjects()) {
 			if (g instanceof Wave) {
 				float d = ((Wave)g).getHeightAt(x, depth);
 				System.out.println("wave, h = " + d);
 				System.out.println(getOceanLevel(depth));
-				if (d != 0) return d;
+				if (d > dist) dist = d;
 			}
 		}
-		return OCEAN_LEVEL - depth * DEPTH_STEP;
+		return dist;
 	}
 	
 	/**

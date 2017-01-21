@@ -76,15 +76,18 @@ public class Player extends GameObject {
 		}
 
 		if (getPosition().y < ((GameScene)getScene()).getDynamicOceanLevel(getPosition().x, step)) {
-			/**
+			 /**
+			 *
 			 * keep depth
 			 */
+			/*
 			float depth = ((GameScene)getScene()).getDynamicOceanLevel(getPosition().x, step) - getPosition().y;
 			velocity.y += depth * BOUYANCY * dt;
 			velocity.y -= velocity.y * velocity.y * Y_DRAG * Math.signum(velocity.y) * dt;
 			
 			velocity.x -= velocity.x * velocity.x * X_DRAG * Math.signum(velocity.x) * dt;
-			
+			*/
+			setPosition(new Vector2(getPosition().x, ((GameScene)getScene()).getDynamicOceanLevel(getPosition().x, step)));
 			/** 
 			 * move left and right
 			 */

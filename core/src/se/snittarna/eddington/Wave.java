@@ -42,12 +42,12 @@ public class Wave extends GameObject {
 
 	public float getHeightAt(float x, int step) {
 		if (step != this.step || x < getPosition().x || x > getPosition().x + getSize().x) {
-			return 0;
+			return Integer.MIN_VALUE;
 		} else {
 			if (x < getPosition().x + tip.x) {
 				return MathUtils.lerp(GameScene.getOceanLevel(step), GameScene.getOceanLevel(step) + tip.y, (x - getPosition().x) / tip.x);
 			} else {
-				return MathUtils.lerp(GameScene.getOceanLevel(step) + tip.y, GameScene.getOceanLevel(step), (x - getPosition().x) / (getSize().x - tip.x + getPosition().x));
+				return tip.y + MathUtils.lerp(GameScene.getOceanLevel(step) + tip.y, GameScene.getOceanLevel(step), (x - getPosition().x) / (getSize().x - tip.x));
 			}
 		}
 	}
