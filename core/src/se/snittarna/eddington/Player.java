@@ -11,12 +11,20 @@ public class Player extends GameObject {
 	private final float X_DRAG = .05f;
 	private final float Y_DRAG = .05f;
 	
+	private enum State {
+		BOAT,
+		SWIM
+	};
+	
+	private State state;
+	
 	private Vector2 velocity;
 	private int step;
 	
 	public Player() {
 		super(new Vector2(), new Vector2(1, 1), new Animation(new Sprite(AssetManager.getTexture("player"))));
 		velocity = new Vector2();
+		state = State.BOAT;
 	}
 
 	
@@ -29,7 +37,7 @@ public class Player extends GameObject {
 		if (velocity.x < 0) {
 			getSprite().setFlip(true, false);
 		} else {
-			getSprite().setFlip(false, false);
+			getSprite().setFlip(false, false );
 		}
 		
 		
