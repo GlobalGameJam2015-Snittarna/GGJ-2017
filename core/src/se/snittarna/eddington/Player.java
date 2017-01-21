@@ -49,8 +49,9 @@ public class Player extends GameObject {
 		 * debug
 		 */
 		if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-			setState(State.SWIM);
-			velocity.y += 5;
+			//setState(State.SWIM);
+			//velocity.y += 5;
+			//this.getScene().addObject(new Projectile());
 		}
 		
 		super.update(dt);
