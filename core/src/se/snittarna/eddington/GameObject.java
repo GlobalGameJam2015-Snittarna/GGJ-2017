@@ -6,7 +6,16 @@ import com.badlogic.gdx.math.Vector2;
 
 public abstract class GameObject {
 	private Vector2 position, size, origin;
+	private Scene scene;
 	
+	public Scene getScene() {
+		return scene;
+	}
+
+	public void setScene(Scene scene) {
+		this.scene = scene;
+	}
+
 	/**
 	 * 
 	 * @return a copy of the size vector.

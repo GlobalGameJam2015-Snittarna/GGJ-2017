@@ -59,6 +59,7 @@ public abstract class Scene {
 	public void update(float dt) {
 		for (GameObject g : toAdd) {
 			objects.add(g);
+			g.setScene(this);
 		}
 		for (GameObject g : toRemove) {
 			objects.remove(g);
