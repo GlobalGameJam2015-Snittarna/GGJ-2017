@@ -73,7 +73,7 @@ public class Player extends GameObject {
 		if (Gdx.input.isKeyJustPressed(Keys.S)) {
 			if (step < 1) step += 1;
 		}
-		
+		GameScene.getOceanLevel(-5);
 		if (getPosition().y < GameScene.getOceanLevel(step)) {
 			/**
 			 * keep depth

@@ -12,7 +12,7 @@ public class SquidArm extends GameObject {
 	private float extendSpeed;
 	
 	private final float BASE_LEVEL = GameScene.getOceanLevel(3);
-	private final float MAX_EXTENSION = 100f;
+	private final float MAX_EXTENSION = GameScene.getOceanLevel(-3);
 	
 	private Sprite arm;
 	
@@ -24,7 +24,7 @@ public class SquidArm extends GameObject {
 	}
 	
 	public void update(float dt) {
-		if(!attacking) currentLevel = MathUtils.lerp(currentLevel, BASE_LEVEL, 0.1f);
+		if(!attacking) this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, BASE_LEVEL, 0.01f)));
 		super.update(dt);
 	}
 	
@@ -33,7 +33,7 @@ public class SquidArm extends GameObject {
 	}
 	
 	public void attack() {
-		MathUtils.lerp(currentLevel, MAX_EXTENSION, 0.1f);
+		this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, MAX_EXTENSION, 0.01f)));
 	}
 	
 	public void tease() {
@@ -41,10 +41,10 @@ public class SquidArm extends GameObject {
 		float lowTease = BASE_LEVEL - 0.5f ;
 		
 		if(goUp) {
-			MathUtils.lerp(currentLevel, highTease, 0.01f);
+			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, highTease, 0.01f)));
 			goUp = (currentLevel >= highTease-0.01f); 
 		} else {
-			MathUtils.lerp(currentLevel, lowTease, 0.01f);
+			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, lowTease, 0.01f)));
 			goUp = (currentLevel <= lowTease+0.01f); 
 		}
 	}
