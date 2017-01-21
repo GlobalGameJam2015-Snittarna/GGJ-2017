@@ -8,6 +8,6 @@ public class GameScene extends Scene {
 	
 	public void update(float dt) {
 		super.update(dt);
-		//getCamera().zoom *= 1.001f;
+		getCamera().zoom *= 1.001f;
 	}
 }
