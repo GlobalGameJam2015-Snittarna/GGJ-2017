@@ -20,7 +20,9 @@ public class GameScene extends Scene {
 	
 	public GameScene() {
 		super();
-		addObject(new Player());
+		Player p = new Player();
+		addObject(p);
+		//getCamera().setFollow(p, 6, 3);
 	}
 	
 	public void update(float dt) {

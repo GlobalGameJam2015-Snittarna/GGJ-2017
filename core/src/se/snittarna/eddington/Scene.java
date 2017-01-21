@@ -14,9 +14,9 @@ public abstract class Scene {
 	
 	private ArrayList<GameObject> toAdd, toRemove, objects;
 	
-	private OrthographicCamera camera;
+	private Camera camera;
 	
-	public OrthographicCamera getCamera() {
+	public Camera getCamera() {
 		return camera;
 	}
 	
@@ -50,7 +50,7 @@ public abstract class Scene {
 		toAdd = new ArrayList<GameObject>();
 		toRemove = new ArrayList<GameObject>();
 		objects = new ArrayList<GameObject>();
-		camera = new OrthographicCamera(16, 9);
+		camera = new Camera(16, 9);
 	}
 	
 	/**

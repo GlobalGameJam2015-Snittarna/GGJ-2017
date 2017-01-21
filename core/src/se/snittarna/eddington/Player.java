@@ -26,6 +26,12 @@ public class Player extends GameObject {
 		velocity.add(0, GameScene.GRAVITY * dt);
 		setPosition(getPosition().add(velocity.cpy().scl(dt)));
 		
+		if (velocity.x < 0) {
+			getSprite().setFlip(true, false);
+		} else {
+			getSprite().setFlip(false, false);
+		}
+		
 		
 		/**
 		 * step up and down
