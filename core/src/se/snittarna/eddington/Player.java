@@ -9,9 +9,9 @@ import com.badlogic.gdx.math.Vector2;
 public class Player extends GameObject {
 	
 	private final int ACCELERATION = 80;
-	private final float X_DRAG = 20f;
-	private final float Y_DRAG = 30f;
-	private final float BOUYANCY = .001f;
+	private final float X_DRAG = .2f;
+	private final float Y_DRAG = .3f;
+	private final float BOUYANCY = 5f;
 	
 	public enum State {
 		BOAT ("boat", new Vector2(18, 10)),
@@ -79,7 +79,7 @@ public class Player extends GameObject {
 			/**
 			 * keep depth
 			 */
-			float depth = GameScene.getOceanLevel(step) - getPosition().y;
+			float depth = ((GameScene)getScene()).getDynamicOceanLevel(getPosition().x, step) - getPosition().y;
 			velocity.y += depth * BOUYANCY * dt;
 			velocity.y -= velocity.y * velocity.y * Y_DRAG * Math.signum(velocity.y) * dt;
 			
