@@ -7,8 +7,8 @@ import com.badlogic.gdx.math.Vector2;
 
 public class GameScene extends Scene {
 	
-	public static final float OCEAN_LEVEL = -50;
-	public static final float DEPTH_STEP = 15;
+	public static final float OCEAN_LEVEL = -30;
+	public static final float DEPTH_STEP = 5;
 	public static final float GRAVITY = -30;
 	
 	/**
@@ -46,6 +46,7 @@ public class GameScene extends Scene {
 		addObject(new Background("mountain", 10, 1));
 		addObject(new Background("background1", 5f, -1));
 		addObject(new Background("background1", 5f, 1));
+		addObject(new Ocean());
 		Player p = new Player();
 		addObject(new Wave(0, 1, 0, 2));
 		addObject(new Wave(-6, -1, 0, 1));
