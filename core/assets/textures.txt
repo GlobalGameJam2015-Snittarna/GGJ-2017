@@ -9,3 +9,4 @@ background,137,0,330,180
 hand,1,319,32,32
 squid,1,352,32,32
 background1,138,180,330,180
+mountain,38,362,330,180
