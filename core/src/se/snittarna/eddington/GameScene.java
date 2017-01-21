@@ -5,4 +5,9 @@ public class GameScene extends Scene {
 		super();
 		addObject(new TestObject());
 	}
+	
+	public void update(float dt) {
+		super.update(dt);
+		//getCamera().zoom *= 1.001f;
+	}
 }
