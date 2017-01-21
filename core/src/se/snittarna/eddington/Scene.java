@@ -56,7 +56,7 @@ public abstract class Scene {
 	/**
 	 * calls update() on all objects and updates the object lists.
 	 */
-	public void update() {
+	public void update(float dt) {
 		for (GameObject g : toAdd) {
 			objects.add(g);
 		}
@@ -67,7 +67,7 @@ public abstract class Scene {
 		toRemove.clear();
 		
 		for (GameObject g : objects) {
-			g.update();
+			g.update(dt);
 		}
 	}
 	

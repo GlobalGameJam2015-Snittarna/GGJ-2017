@@ -32,7 +32,7 @@ public abstract class GameObject {
 		setSize(size);
 	}
 	
-	public void update() {
+	public void update(float dt) {
 		
 	}
 	
