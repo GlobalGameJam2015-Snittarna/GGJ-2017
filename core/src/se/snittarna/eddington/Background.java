@@ -1,5 +1,9 @@
 package se.snittarna.eddington;
 
+import java.awt.color.ColorSpace;
+import java.util.Random;
+
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector2;
 
 public class Background extends GameObject {
@@ -19,6 +23,8 @@ public class Background extends GameObject {
 	}
 	
 	public void update(float dt) {
+		//Random r = new Random();
+		//getSprite().setColor(new Color(r.nextInt(255), r.nextInt(255), r.nextInt(255), 255));
 		setPosition(getPosition().add(new Vector2(-scrollSpeed * dt, 0)));
 		if (getPosition().x < 3 * -getSize().x / 2) {
 			setPosition(new Vector2(165, -90));
