@@ -18,8 +18,9 @@ public class AssetManager {
 		spriteSheet = new Texture("spritesheet.png");
 		
 		for (String s : Gdx.files.internal("textures.txt").readString().split("\n")) {
+			System.out.println(s);
 			String[] vals = s.split(",");
-			textureRegions.put(vals[0], new TextureRegion(spriteSheet, Integer.parseInt(vals[1]), Integer.parseInt(vals[2]), Integer.parseInt(vals[3]), Integer.parseInt(vals[4])));
+			textureRegions.put(vals[0], new TextureRegion(spriteSheet, Integer.parseInt(vals[1]), Integer.parseInt(vals[2]), Integer.parseInt(vals[3]), Integer.parseInt(vals[4].trim())));
 		}
 	}
 	

@@ -55,6 +55,7 @@ public class Game extends ApplicationAdapter {
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		currentScene.getCamera().update();
 		gameBatch.setProjectionMatrix(currentScene.getCamera().combined);
 		gameBatch.begin();
 		currentScene.drawGame(gameBatch);
