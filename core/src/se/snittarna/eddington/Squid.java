@@ -19,8 +19,6 @@ public class Squid extends GameObject {
 	public Squid(Vector2 position) {
 		super(position, new Vector2(32, 32),  new Animation(new Sprite(AssetManager.getTexture("squid"))));
 		arms.add(new SquidArm(100, 0.1f));
-		//arms.add(new SquidArm(100, 0.1f));
-		
 		attackIndex = 0;
 	}
 	int count = 0;
@@ -29,16 +27,6 @@ public class Squid extends GameObject {
 			arms.get(i).update(dt);
 		}	
 		attack();
-		
-		count += 1;
-		
-		if(count >= 10) {
-			count = 0; 
-			attackIndex = 0;
-		}
-		
-		System.out.println(count + " : AYY");
-		
 		super.update(dt);
 	}
 	
