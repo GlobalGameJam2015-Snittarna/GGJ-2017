@@ -8,10 +8,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends GameObject {
 	
-	private final int ACCELERATION = 120;
-	private final float X_DRAG = .2f;
+	private final int ACCELERATION = 200;
+	private final float X_DRAG = .08f;
 	private final float Y_DRAG = .3f;
-	private final float BOUYANCY = 10f;
+	private final float BOUYANCY = 30f;
 	
 	public enum State {
 		BOAT ("boat", new Vector2(18, 10)),

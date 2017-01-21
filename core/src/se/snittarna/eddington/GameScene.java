@@ -9,7 +9,7 @@ public class GameScene extends Scene {
 	
 	public static final float OCEAN_LEVEL = -50;
 	public static final float DEPTH_STEP = 15;
-	public static final float GRAVITY = -15;
+	public static final float GRAVITY = -30;
 	
 	/**
 	 * 
