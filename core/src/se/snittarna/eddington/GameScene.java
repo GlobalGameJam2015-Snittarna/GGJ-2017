@@ -22,6 +22,8 @@ public class GameScene extends Scene {
 		super();
 		Player p = new Player();
 		addObject(p);
+		addObject(new Wave(0, 1, 0, 2));
+		addObject(new Wave(-6, -1, 0, 1));
 		//getCamera().setFollow(p, 6, 3);
 	}
 	

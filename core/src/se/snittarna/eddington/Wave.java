@@ -9,12 +9,17 @@ public class Wave extends GameObject {
 	
 	private float speed;
 	
-	public Wave(float x, int step, int height) {
-		super(new Vector2(x, GameScene.getOceanLevel(step)), new Vector2(1+(height*0.5f), 1+(height*0.3f)), new Animation(new Sprite(AssetManager.getTexture("wave" + height))));
+	public Wave(float x, float speed, int step, int height) {
+		super(new Vector2(x, GameScene.getOceanLevel(step)), new Vector2(2.5f+(height*1.8f), 1+(height*1.3f)), new Animation(new Sprite(AssetManager.getTexture(getImageName(height)))));
+		this.speed = speed;
 	}
 	
 	public void update(float dt) {
-		this.getPosition().cpy().add(new Vector2(speed, 0));
+		setPosition(getPosition().add(new Vector2(speed, 0).cpy().scl(dt)));
 		super.update(dt);
+	}
+	
+	public static String getImageName(int height) {
+		return "wave" + height;
 	}
 }

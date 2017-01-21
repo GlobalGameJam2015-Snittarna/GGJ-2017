@@ -13,8 +13,8 @@ public class Player extends GameObject {
 	private final float Y_DRAG = 3f;
 	
 	public enum State {
-		BOAT ("boat", new Vector2(2, 1)),
-		SWIM ("player", new Vector2(1, 1));
+		BOAT ("boat", new Vector2(0.8f, 0.4f)),
+		SWIM ("player", new Vector2(0.4f, 0.4f));
 		
 		public TextureRegion texture;
 		public Vector2 size;
@@ -30,7 +30,7 @@ public class Player extends GameObject {
 	private int step;
 	
 	public Player() {
-		super(new Vector2(), new Vector2(1, 1), new Animation(new Sprite(AssetManager.getTexture("boat"))));
+		super(new Vector2(), new Vector2(0.2f, 0.2f), new Animation(new Sprite(AssetManager.getTexture("boat"))));
 		velocity = new Vector2();
 		setState(State.BOAT);
 	}
@@ -73,7 +73,7 @@ public class Player extends GameObject {
 		if (Gdx.input.isKeyJustPressed(Keys.S)) {
 			if (step < 1) step += 1;
 		}
-		GameScene.getOceanLevel(-5);
+
 		if (getPosition().y < GameScene.getOceanLevel(step)) {
 			/**
 			 * keep depth
