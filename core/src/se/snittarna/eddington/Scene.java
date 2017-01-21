@@ -2,6 +2,7 @@ package se.snittarna.eddington;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -12,6 +13,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public abstract class Scene {
 	
 	private ArrayList<GameObject> toAdd, toRemove, objects;
+	
+	private OrthographicCamera camera;
+	
+	public OrthographicCamera getCamera() {
+		return camera;
+	}
 	
 	/**
 	 * objects to be added.
@@ -36,10 +43,14 @@ public abstract class Scene {
 		return objects;
 	}
 
+	/**
+	 * creates a new scene. Game viewport size is 16x9.
+	 */
 	public Scene() {
 		toAdd = new ArrayList<GameObject>();
 		toRemove = new ArrayList<GameObject>();
 		objects = new ArrayList<GameObject>();
+		camera = new OrthographicCamera(16, 9);
 	}
 	
 	/**
