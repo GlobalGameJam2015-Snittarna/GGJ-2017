@@ -13,7 +13,7 @@ public class SquidArm extends GameObject {
 	private float waveCount;
 	private float endAttackCount;
 	
-	private final float BASE_LEVEL = GameScene.getOceanLevel(3);
+	private final float BASE_LEVEL = GameScene.getOceanLevel(11);
 	private final float MAX_EXTENSION = GameScene.getOceanLevel(-3);
 	
 	private Sprite arm;

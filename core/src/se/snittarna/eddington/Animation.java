@@ -1,5 +1,6 @@
 package se.snittarna.eddington;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -32,15 +33,19 @@ public class Animation extends Sprite {
 		super(sprite);
 	}
 	
+	public int frame(int frame, int size) {
+		return 1+frame+size*frame;
+	}
+	
 	public void animate(float dt) {
-		animationCount += 1 * dt;
-		
+		animationCount += 10 * dt;
+		System.out.println(currentFrame + ": ADSA");
+		this.setRegion(frame(minFrame, this.getRegionWidth()) + currentFrame*this.getRegionWidth()+1+currentFrame, 
+				this.getRegionY(), this.getRegionWidth(), this.getRegionHeight());
 		if(animationCount > maxAnimationCount) {
-			currentFrame += 1*dt;
-			scroll(1 + getRegionWidth() * currentFrame + currentFrame, 0);
-			if(currentFrame > maxFrame) {
+			currentFrame += 1;
+			if(currentFrame >= maxFrame) {
 				currentFrame = 0;
-				this.setRegionX(minFrame * getRegionWidth());
 			}
 			animationCount = 0;
 		}
