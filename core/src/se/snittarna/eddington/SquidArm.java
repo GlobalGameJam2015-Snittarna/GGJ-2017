@@ -16,11 +16,15 @@ public class SquidArm extends GameObject {
 	
 	private Sprite arm;
 	
+	private boolean goUp;
+	private boolean attacking;
+	
 	public SquidArm(Vector2 position, Vector2 size, Animation sprite) {
 		super(position, size, sprite);
 	}
 	
 	public void update(float dt) {
+		if(!attacking) currentLevel = MathUtils.lerp(currentLevel, BASE_LEVEL, 0.1f);
 		super.update(dt);
 	}
 	
@@ -28,11 +32,21 @@ public class SquidArm extends GameObject {
 		currentLevel += extendSpeed;
 	}
 	
+	public void attack() {
+		MathUtils.lerp(currentLevel, MAX_EXTENSION, 0.1f);
+	}
+	
 	public void tease() {
 		float highTease = BASE_LEVEL + 0.5f;
 		float lowTease = BASE_LEVEL + 0.5f;
 		
-		//MathUtils.lerp(fromValue, toValue, progress);
+		if(goUp) {
+			MathUtils.lerp(currentLevel, highTease, 0.1f);
+			goUp = (currentLevel >= highTease-0.1f); 
+		} else {
+			MathUtils.lerp(currentLevel, lowTease, 0.1f);
+			goUp = (currentLevel <= lowTease+0.1f); 
+		}
 	}
 	
 	public void draw(SpriteBatch batch) {
