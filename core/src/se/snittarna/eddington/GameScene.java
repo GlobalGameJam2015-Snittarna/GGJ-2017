@@ -46,7 +46,7 @@ public class GameScene extends Scene {
 		addObject(new Background("mountain", 10, 1));
 		addObject(new Background("background1", 5f, -1));
 		addObject(new Background("background1", 5f, 1));
-		
+		addObject(new Underwater());
 		addObject(new Ocean());
 		Player p = new Player();
 		addObject(new Wave(0, 1, 0, 2));
