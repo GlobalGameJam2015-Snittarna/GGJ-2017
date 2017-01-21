@@ -26,6 +26,7 @@ public class GameScene extends Scene {
 		addObject(p);
 		addObject(new Wave(0, 1, 0, 2));
 		addObject(new Wave(-6, -1, 0, 1));
+		addObject(new Squid(new Vector2(-170, 0)));
 		//getCamera().setFollow(p, 6, 3);
 	}
 	

@@ -2,6 +2,7 @@ package se.snittarna.eddington;
 
 import java.util.ArrayList;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -11,11 +12,11 @@ public class Squid extends GameObject {
 	
 	private boolean hasAttackTeased;
 	
-	private ArrayList<Integer> armToUseIndexes;
-	private ArrayList<SquidArm> arms;
+	private ArrayList<Integer> armToUseIndexes = new ArrayList<Integer>();
+	private ArrayList<SquidArm> arms = new ArrayList<SquidArm>();
 	
-	public Squid(Vector2 position, Vector2 size, Animation sprite) {
-		super(position, size, sprite);
+	public Squid(Vector2 position) {
+		super(position, new Vector2(32, 32),  new Animation(new Sprite(AssetManager.getTexture("squid"))));
 	}
 	
 	public void update(float dt) {
@@ -27,7 +28,7 @@ public class Squid extends GameObject {
 	
 	public void attack() {
 		for(int i = 0; i < armToUseIndexes.size(); i++) {
-			if(!hasAttackTeased) {
+		if(!hasAttackTeased) {
 				arms.get(armToUseIndexes.get(i)).tease();
 			} else {
 				arms.get(armToUseIndexes.get(i)).attack();

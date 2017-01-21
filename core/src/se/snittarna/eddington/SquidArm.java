@@ -19,23 +19,20 @@ public class SquidArm extends GameObject {
 	private boolean goUp;
 	private boolean attacking;
 	
-	public SquidArm(Vector2 position) {
+	public SquidArm(Vector2 position, float extendSpeed) {
 		super(position, new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("hand"))));
+		this.extendSpeed = extendSpeed;
 	}
 	
 	public void update(float dt) {
 		if(!attacking) this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, BASE_LEVEL, 0.01f)));
 		attacking = true;
-		tease();
+		attack();
 		super.update(dt);
 	}
 	
-	public void extend() {
-		currentLevel += extendSpeed;
-	}
-	
 	public void attack() {
-		this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, MAX_EXTENSION, 0.01f)));
+		this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, MAX_EXTENSION, extendSpeed)));
 	}
 	
 	public void tease() {
