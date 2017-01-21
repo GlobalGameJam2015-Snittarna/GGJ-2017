@@ -45,10 +45,14 @@ public class Game extends ApplicationAdapter {
 		AssetManager.load();
 		
 		System.out.println(AssetManager.getTexture("test"));
+		currentScene = new GameScene();
 	}
 
 	@Override
 	public void render () {
+		currentScene.update();
+		
+		
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		

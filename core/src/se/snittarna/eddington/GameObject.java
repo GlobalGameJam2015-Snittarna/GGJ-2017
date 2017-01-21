@@ -7,6 +7,22 @@ import com.badlogic.gdx.math.Vector2;
 public abstract class GameObject {
 	private Vector2 position, size, origin;
 	
+	/**
+	 * 
+	 * @return a copy of the size vector.
+	 */
+	public Vector2 getSize() {
+		return size.cpy();
+	}
+
+	/**
+	 * 
+	 * @return a copy of the origin vector.
+	 */
+	public Vector2 getOrigin() {
+		return origin.cpy();
+	}
+
 	private Animation sprite;
 	
 	public GameObject(Vector2 position, Vector2 size, Animation sprite) {
@@ -25,7 +41,7 @@ public abstract class GameObject {
 		origin = new Vector2(sprite.getOriginX()/2, sprite.getOriginY()/2);
 	}
 	
-	private Animation getSprite() {
+	protected Animation getSprite() {
 		return sprite;
 	}
 
@@ -47,12 +63,12 @@ public abstract class GameObject {
 	}
 	
 	public void setSize(Vector2 s) { 
-		size = s;
+		size = s.cpy();
 		if (sprite != null) sprite.setSize(s.x, s.y); 
 	}
 	
 	protected void setOrigin(Vector2 origin) {
-		this.origin = origin;
+		this.origin = origin.cpy();
 		if (sprite != null) sprite.setOrigin(origin.x, origin.y);
 	}
 	
@@ -70,5 +86,6 @@ public abstract class GameObject {
 	
 	public void setPosition(Vector2 position) {
 		this.position = position.cpy();
+		this.sprite.setPosition(this.position.x, this.position.y);
 	}
 }

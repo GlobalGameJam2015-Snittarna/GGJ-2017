@@ -108,7 +108,7 @@ public abstract class Scene {
 	 */
 	public void drawGame(SpriteBatch gameBatch) {
 		for (GameObject g : objects) {
-			//g.draw();
+			g.draw(gameBatch);
 		}
 	}
 }
