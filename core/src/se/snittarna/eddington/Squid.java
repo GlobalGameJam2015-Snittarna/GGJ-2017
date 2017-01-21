@@ -17,7 +17,7 @@ public class Squid extends GameObject {
 	private ArrayList<SquidArm> arms = new ArrayList<SquidArm>();
 	
 	public Squid(Vector2 position) {
-		super(position, new Vector2(32, 32),  new Animation(new Sprite(AssetManager.getTexture("squid"))));
+		super(position, new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("squid"))));
 		arms.add(new SquidArm(100, 0.1f));
 		attackIndex = 0;
 	}

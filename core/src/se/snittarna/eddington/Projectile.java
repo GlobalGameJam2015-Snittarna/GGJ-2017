@@ -8,7 +8,7 @@ public class Projectile extends GameObject {
 	private float speed;
 	
 	public Projectile(Vector2 position, float angle, float speed) {
-		super(position, new Vector2(1, 397), new Animation(new Sprite(AssetManager.getTexture("squid"))));
+		super(position, new Vector2(10, 14), new Animation(new Sprite(AssetManager.getTexture("projectile"))));
 		this.angle = angle;
 		this.speed = speed;
 	}
