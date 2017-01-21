@@ -23,12 +23,22 @@ public class Squid extends GameObject {
 		
 		attackIndex = 0;
 	}
-	
+	int count = 0;
 	public void update(float dt) {
 		for(int i = 0; i < arms.size(); i++) {
 			arms.get(i).update(dt);
 		}	
 		attack();
+		
+		count += 1;
+		
+		if(count >= 10) {
+			count = 0; 
+			attackIndex = 0;
+		}
+		
+		System.out.println(count + " : AYY");
+		
 		super.update(dt);
 	}
 	

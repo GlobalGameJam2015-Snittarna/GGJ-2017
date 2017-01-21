@@ -47,7 +47,7 @@ public class SquidArm extends GameObject {
 			this.setPosition(new Vector2(this.getPosition().cpy().x, this.getPosition().cpy().y + ((float)Math.sin(waveCount)*0.5f)));
 		} else {
 			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, BASE_LEVEL, extendSpeed)));
-			if(this.getPosition().cpy().y < BASE_LEVEL - 0.5f) goUp = false;
+			if(this.getPosition().cpy().y < BASE_LEVEL + 0.5f) goUp = false;
 		}
 	}
 	
