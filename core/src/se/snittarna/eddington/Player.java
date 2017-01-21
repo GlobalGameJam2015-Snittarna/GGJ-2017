@@ -8,13 +8,14 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends GameObject {
 	
-	private final int ACCELERATION = 8;
-	private final float X_DRAG = 2f;
-	private final float Y_DRAG = 3f;
+	private final int ACCELERATION = 80;
+	private final float X_DRAG = 20f;
+	private final float Y_DRAG = 30f;
+	private final float BOUYANCY = .001f;
 	
 	public enum State {
-		BOAT ("boat", new Vector2(0.8f, 0.4f)),
-		SWIM ("player", new Vector2(0.4f, 0.4f));
+		BOAT ("boat", new Vector2(18, 10)),
+		SWIM ("player", new Vector2(9, 11));
 		
 		public TextureRegion texture;
 		public Vector2 size;
@@ -79,7 +80,7 @@ public class Player extends GameObject {
 			 * keep depth
 			 */
 			float depth = GameScene.getOceanLevel(step) - getPosition().y;
-			velocity.y += depth * 10f * dt;
+			velocity.y += depth * BOUYANCY * dt;
 			velocity.y -= velocity.y * velocity.y * Y_DRAG * Math.signum(velocity.y) * dt;
 			
 			velocity.x -= velocity.x * velocity.x * X_DRAG * Math.signum(velocity.x) * dt;

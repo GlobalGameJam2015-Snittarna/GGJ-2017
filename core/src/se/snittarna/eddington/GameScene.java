@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScene extends Scene {
 	
-	public static final float OCEAN_LEVEL = -2;
-	public static final float DEPTH_STEP = .5f;
-	public static final float GRAVITY = -5;
+	public static final float OCEAN_LEVEL = -50;
+	public static final float DEPTH_STEP = 15;
+	public static final float GRAVITY = -15;
 	
 	/**
 	 * get the ocean level (y) for a given game depth (z).
