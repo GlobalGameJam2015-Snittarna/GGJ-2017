@@ -17,6 +17,8 @@ public class Squid extends GameObject {
 	
 	public Squid(Vector2 position) {
 		super(position, new Vector2(32, 32),  new Animation(new Sprite(AssetManager.getTexture("squid"))));
+		arms.add(new SquidArm(100, 0.1f));
+		arms.add(new SquidArm(100, 0.1f));
 	}
 	
 	public void update(float dt) {
@@ -28,7 +30,7 @@ public class Squid extends GameObject {
 	
 	public void attack() {
 		for(int i = 0; i < armToUseIndexes.size(); i++) {
-		if(!hasAttackTeased) {
+			if(!hasAttackTeased) {
 				arms.get(armToUseIndexes.get(i)).tease();
 			} else {
 				arms.get(armToUseIndexes.get(i)).attack();

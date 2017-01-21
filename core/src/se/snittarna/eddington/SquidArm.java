@@ -10,6 +10,7 @@ public class SquidArm extends GameObject {
 	
 	private float currentLevel;
 	private float extendSpeed;
+	private float waveCount;
 	
 	private final float BASE_LEVEL = GameScene.getOceanLevel(3);
 	private final float MAX_EXTENSION = GameScene.getOceanLevel(-3);
@@ -19,15 +20,13 @@ public class SquidArm extends GameObject {
 	private boolean goUp;
 	private boolean attacking;
 	
-	public SquidArm(Vector2 position, float extendSpeed) {
-		super(position, new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("hand"))));
+	public SquidArm(float x, float extendSpeed) {
+		super(new Vector2(x, GameScene.getOceanLevel(3)), new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("hand"))));
 		this.extendSpeed = extendSpeed;
 	}
 	
 	public void update(float dt) {
-		if(!attacking) this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, BASE_LEVEL, 0.01f)));
-		attacking = true;
-		attack();
+		if(!attacking) tease();
 		super.update(dt);
 	}
 	
@@ -36,16 +35,8 @@ public class SquidArm extends GameObject {
 	}
 	
 	public void tease() {
-		float highTease = BASE_LEVEL + 8f;
-		float lowTease = BASE_LEVEL - 8f;
-		
-		if(!goUp) {
-			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, highTease, 0.08f)));
-			goUp = (this.getPosition().cpy().y >= highTease-0.1f); 
-		} else {
-			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, lowTease, 0.08f)));
-			goUp = !(this.getPosition().cpy().y <= lowTease+0.1f); 
-		}
+		waveCount += 0.1f;
+		this.setPosition(new Vector2(this.getPosition().cpy().x, this.getPosition().cpy().y + ((float)Math.sin(waveCount)*0.5f)));
 	}
 	
 	public void draw(SpriteBatch batch) {
