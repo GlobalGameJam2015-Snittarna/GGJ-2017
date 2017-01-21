@@ -15,7 +15,7 @@ public class Projectile extends GameObject {
 	
 	public void update(float dt) {
 		this.setPosition(new Vector2(this.getPosition().cpy().x + getVelocity().cpy().x*dt, this.getPosition().cpy().y + getVelocity().cpy().y*dt));
-		fallSpeed += 1 * dt;
+		fallSpeed += 2 * dt;
 	}
 	
 	public Vector2 getVelocity() {
