@@ -9,14 +9,14 @@ public class Animation extends Sprite {
 	private int maxFrame;
 	private int minFrame;
 	private int currentFrame;
-	private int maxAnimationCount;
-	private int animationCount;
+	private float maxAnimationCount;
+	private float animationCount;
 	
 	public Animation(Sprite sprite) {
 		super(sprite);
 	}
 	
-	public Animation(Sprite sprite, int maxFrame, int minFrame, int maxAnimationCount) {
+	public Animation(Sprite sprite, int maxFrame, int minFrame, float maxAnimationCount) {
 		super(sprite);
 		this.maxFrame = maxFrame;
 		this.minFrame = minFrame;
@@ -33,7 +33,7 @@ public class Animation extends Sprite {
 	}
 	
 	public void animate(float dt) {
-		animationCount += 1;
+		animationCount += 1 * dt;
 		
 		if(animationCount > maxAnimationCount) {
 			currentFrame += 1*dt;
