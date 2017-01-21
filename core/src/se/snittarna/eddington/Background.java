@@ -6,6 +6,8 @@ public class Background extends GameObject {
 	
 	private float scrollSpeed;
 	
+	//private 
+	
 	/**
 	 * 
 	 * @param scrollSpeed
