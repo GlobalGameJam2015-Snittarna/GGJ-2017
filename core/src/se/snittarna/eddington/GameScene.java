@@ -20,6 +20,7 @@ public class GameScene extends Scene {
 	
 	public GameScene() {
 		super();
+		addObject(new Background());
 		Player p = new Player();
 		addObject(p);
 		addObject(new Wave(0, 1, 0, 2));
