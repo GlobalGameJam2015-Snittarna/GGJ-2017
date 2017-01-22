@@ -143,9 +143,11 @@ public class Player extends GameObject implements Depthable {
 	public void degrade() {
 		if(state == State.BOAT) {
 			setState(State.SWIM);
+			AssetManager.getSound("Skadad").play();
 			currentAmmo = 0;
 		} else {
 			getScene().removeObject(this);
+			AssetManager.getSound("Game over").play();
 			GameScene.gameOver = true;
 		}
 	}

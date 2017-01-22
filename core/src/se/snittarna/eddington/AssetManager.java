@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -38,5 +39,19 @@ public class AssetManager {
 	
 	public static TextureRegion getTexture(String name) {
 		return textureRegions.get(name);
+	}
+	
+	private static HashMap<String, Sound> sounds;
+	
+	public static Sound getSound(String name) {
+		if (sounds == null) {
+			sounds = new HashMap<String, Sound>();
+		}
+		if (sounds.containsKey(name)) {
+			return sounds.get(name);
+		} else {
+			sounds.put(name, Gdx.audio.newSound(Gdx.files.internal("music/" + name + ".mp3")));
+			return sounds.get(name);
+		}
 	}
 }
