@@ -41,6 +41,12 @@ public abstract class GameObject {
 		setSize(size);
 	}
 	
+	public Rectangle getHitbox() {
+		//System.out.println("hitbox size " + size);
+		return new Rectangle(this.getSprite().getBoundingRectangle().x, this.getSprite().getBoundingRectangle().y, this.getSprite().getBoundingRectangle().width, this.getSprite().getBoundingRectangle().height);
+		//return new Rectangle(this.position.cpy().sub(this.size.cpy().scl(.5f)), this.size);
+	}
+	
 	public void update(float dt) {
 		
 	}
