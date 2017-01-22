@@ -59,8 +59,9 @@ public class GameScene extends Scene {
 		super();
 		addObject(new Background("background", 5, -1));
 		addObject(new Background("background", 5, 1));
-		addObject(new Background("mountain", 5, -1));
-		addObject(new Background("mountain", 5, 1));
+		//addObject(new Background("mountain", 5, -1));
+		//addObject(new Background("mountain", 5, 1));
+		addObject(new Mountain());
 		addObject(new Background("background1", 10f, -1));
 		addObject(new Background("background1", 10f, 1));
 		addObject(new Underwater());
