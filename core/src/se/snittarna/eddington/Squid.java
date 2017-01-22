@@ -61,13 +61,15 @@ public class Squid extends GameObject {
 			arms.get(i).update(dt);
 			for (GameObject g : getScene().getObjects()) {
 				if (g instanceof Projectile) {
-					if(g.getHitbox().collision(arms.get(i).getHitbox())) {
+					if (g.getHitbox().collision(arms.get(i).getHitbox())) {
 						getScene().removeObject(g);
 						arms.get(i).setDying();
+						GameScene.score += 5;
 					}
-				} else if(g instanceof Player) {
+				} else if (g instanceof Player) {
 					if(!arms.get(i).getDying() && g.getHitbox().collision(arms.get(i).getHitbox())) {
 						((Player) g).degrade();
+						GameScene.score -= 10;
 						arms.get(i).setDying();
 					}
 				}
@@ -85,7 +87,7 @@ public class Squid extends GameObject {
 	}
 	
 	public void attack() {
-		if(attackIndex != -1) arms.get(attackIndex).startAttack();
+		if (attackIndex != -1) arms.get(attackIndex).startAttack();
 		attackIndex = -1;
 	}
 	

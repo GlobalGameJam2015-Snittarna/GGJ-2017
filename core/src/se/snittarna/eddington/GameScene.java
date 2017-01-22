@@ -18,6 +18,8 @@ public class GameScene extends Scene {
 	public static final float DEPTH_STEP = 8;
 	public static final float GRAVITY = -45;
 	
+	public static int score = 0;
+	
 	private Random random;
 	
 	float timeSinceWave, timeSincePowerup;

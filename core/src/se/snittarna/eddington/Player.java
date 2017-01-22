@@ -18,6 +18,8 @@ public class Player extends GameObject implements Depthable {
 	private final float Y_DRAG = .3f;
 	private final float BOUYANCY = 30f;
 	
+	private float scoreCounter;
+	
 	public int getDepth() {
 		return step;
 	}
@@ -66,6 +68,12 @@ public class Player extends GameObject implements Depthable {
 	}
 	
 	public void update(float dt) {
+		scoreCounter += dt;
+		if (scoreCounter > 1f) {
+			GameScene.score ++;
+			scoreCounter -= 1f;
+		}
+		
 		/**
 		 * debug
 		 */
@@ -142,7 +150,8 @@ public class Player extends GameObject implements Depthable {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		AssetManager.font.draw(batch, "Ammo: " + (currentAmmo/3), 100, 100);
+		AssetManager.font.draw(batch, "Ammo: " + (currentAmmo/3), -150, 0);
+		AssetManager.font.draw(batch, "Score: " + GameScene.score, -150, -20);
 		super.drawUi(batch);
 	}
 }

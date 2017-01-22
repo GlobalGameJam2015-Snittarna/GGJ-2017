@@ -3,6 +3,7 @@ package se.snittarna.eddington;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -20,6 +21,9 @@ public class Game extends ApplicationAdapter {
 	 * the currently active scene being updated and drawn.
 	 */
 	private Scene currentScene;
+	
+	
+	private OrthographicCamera uiCam;
 	
 	public Scene getCurrentScene() {
 		return currentScene;
@@ -46,6 +50,8 @@ public class Game extends ApplicationAdapter {
 		
 		System.out.println(AssetManager.getTexture("test"));
 		currentScene = new GameScene();
+		
+		uiCam = new OrthographicCamera(330, 180);
 	}
 
 	@Override
@@ -61,6 +67,7 @@ public class Game extends ApplicationAdapter {
 		currentScene.drawGame(gameBatch);
 		gameBatch.end();
 		
+		uiBatch.setProjectionMatrix(uiCam.combined);
 		uiBatch.begin();
 		currentScene.drawUi(uiBatch);
 		uiBatch.end();
