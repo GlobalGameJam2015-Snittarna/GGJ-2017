@@ -18,6 +18,8 @@ public class GameScene extends Scene {
 	public static final float DEPTH_STEP = 8;
 	public static final float GRAVITY = -45;
 	
+	private float restartCounter;
+	
 	public static int score = 0;
 	
 	public static boolean gameOver;
@@ -86,6 +88,16 @@ public class GameScene extends Scene {
 	public void update(float dt) {
 		super.update(dt);
 		
+		if(gameOver) {
+			restartCounter += 10*dt;
+			
+			if(restartCounter >= 20) {
+				Game.setCurrentScene(new StartScreen());
+				gameOver = false;
+				restartCounter = 0;
+			}
+		}
+		
 		timeSinceWave += dt;
 		
 		if (random.nextDouble() < timeSinceWave * .001) {
@@ -109,6 +121,11 @@ public class GameScene extends Scene {
 			addObject(new PowerUp(new Vector2(170, getOceanLevel(depth)), spawnBoatParts ? PowerUp.Type.BARREL : PowerUp.Type.PLANK, depth));
 			timeSincePowerup = 0;
 		}
+	}
+	
+	public void drawUi(SpriteBatch uiBatch) {
+		if(gameOver) AssetManager.font.draw(uiBatch, "GAME OVER", 0, 0);
+		super.drawUi(uiBatch);
 	}
 	
 	public void drawGame(SpriteBatch batch) {
