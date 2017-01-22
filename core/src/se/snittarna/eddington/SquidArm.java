@@ -33,6 +33,7 @@ public class SquidArm extends GameObject {
 		}
 		else {
 			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, -300, 0.04f)));
+			this.getSprite().setColor(1, 0, 0, 1);
 			if(this.getPosition().cpy().y <= -300+5.5f) destroy = true;
 		}
 		super.update(dt);
