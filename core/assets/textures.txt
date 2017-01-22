@@ -12,7 +12,7 @@ background1,684,434,330,180
 mountain,1,731,147,154
 projectile,1,397,10,14
 sea,1,413,330,25
-underwater,519,217,330,49
+underwater,1,921,330,49
 barrel,1,687,10,14
 plank,12,687,14,10
 longHand,1,439,19,180
