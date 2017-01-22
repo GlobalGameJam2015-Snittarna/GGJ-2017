@@ -1,5 +1,7 @@
 package se.snittarna.eddington;
 
+import java.util.Random;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.Color;
@@ -20,6 +22,8 @@ public class Player extends GameObject implements Depthable {
 	private final float BOUYANCY = 30f;
 	
 	private float scoreCounter;
+	
+	private Random random;
 	
 	public int getDepth() {
 		return step;
@@ -47,6 +51,7 @@ public class Player extends GameObject implements Depthable {
 		velocity = new Vector2();
 		setState(State.BOAT);
 		currentAmmo = 5;
+		random = new Random();
 	}
 	
 	public void setState(State state) {
@@ -141,9 +146,10 @@ public class Player extends GameObject implements Depthable {
 				velocity.x += ACCELERATION * dt;
 			}
 			
-			if (Math.abs(velocity.x) > 5) {
-				for (int i = 0; i < 10; i++) {
-					getScene().addObject(new Particle(velocity.x > 0 ? getPosition() : getPosition().add(new Vector2(getSize().x, 0)), new Vector2(- Math.signum(velocity.x) * (float)Math.cos(i * .1 + .3), (float) Math.sin(i * .1 + .1)).scl(Math.abs(velocity.x)), new Color(0x2B5575)));
+			if (Math.abs(velocity.x) > 5 && state == State.BOAT) {
+				for (int i = 0; i < 8; i++) {
+					float angle = (float) (i * .1 + .3 + random.nextDouble() * .4);
+					getScene().addObject(new Particle(velocity.x > 0 ? getPosition() : new Vector2(getPosition().x + state.size.x, getPosition().y), new Vector2(- Math.signum(velocity.x) * (float)Math.cos(angle), (float) Math.sin(angle)).scl(Math.abs(velocity.x)), new Color(0x2B5575)));
 				}
 			}
 		}
