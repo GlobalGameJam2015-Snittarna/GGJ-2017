@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends GameObject implements Depthable {
 	private int currentAmmo;
+	private int boatParts;
 	
 	private float fireRate;
 	
@@ -50,7 +51,14 @@ public class Player extends GameObject implements Depthable {
 		getSprite().setRegion(state.texture);
 		getSprite().setSize(state.size.x, state.size.y);
 	}
-
+	
+	public void addAmmo() {
+		currentAmmo += 1;
+	}
+	
+	public void addBoatParts() {
+		boatParts += 1;
+	}
 	
 	public void update(float dt) {
 		/**
@@ -60,6 +68,11 @@ public class Player extends GameObject implements Depthable {
 			this.getScene().addObject(new Projectile(this.getPosition(), -(float)Math.PI/2, 50));
 			currentAmmo -= 3;
 			fireRate = 10;
+		}
+		
+		if(boatParts >= 3) {
+			setState(State.BOAT);
+			boatParts = 0;
 		}
 		
 		if(fireRate > 0) {
