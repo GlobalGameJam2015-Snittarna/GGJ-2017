@@ -26,7 +26,7 @@ public class Squid extends GameObject {
 	Random r = new Random();
 	
 	public Squid(Vector2 position) {
-		super(position, new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("squid"))));
+		super(position, new Vector2(45,26), new Animation(new Sprite(AssetManager.getTexture("squid"))));
 		newArm();
 		maxAddNewArmCount = 100;
 		maxLevelCount = 200;
@@ -81,7 +81,7 @@ public class Squid extends GameObject {
 	}
 	
 	public void newArm() {
-		arms.add(new SquidArm(random((-330/2), (330/2)), 0.1f));
+		arms.add(new SquidArm(random((-330/2)+32, (330/2)), 0.1f));
 	}
 	
 	public void attack() {

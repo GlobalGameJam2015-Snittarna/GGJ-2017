@@ -60,7 +60,7 @@ public class GameScene extends Scene {
 		addObject(new Underwater());
 		addObject(new Ocean());
 		Player p = new Player();
-		addObject(new Squid(new Vector2(-170, 0)));
+		addObject(new Squid(new Vector2(-170, -90)));
 		//getCamera().setFollow(p, 6, 3);
 		addObject(p);
 		

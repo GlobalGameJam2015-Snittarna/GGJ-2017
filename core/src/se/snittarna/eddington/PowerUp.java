@@ -24,9 +24,9 @@ public class PowerUp extends GameObject implements Depthable {
 			if (g instanceof Player) {
 				if(g.getHitbox().collision(getHitbox()) && ((Depthable)g).getDepth() == depth) {
 					if(type == Type.BARREL) {
-						((Player) g).addAmmo();
+						if(((Player)g).isBoat()) ((Player) g).addAmmo();
 					} else {
-						((Player) g).addBoatParts();
+						if(!((Player)g).isBoat()) ((Player) g).addBoatParts();
 					}
 					getScene().removeObject(this);
 				}
