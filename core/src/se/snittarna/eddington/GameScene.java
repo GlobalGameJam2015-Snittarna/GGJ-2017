@@ -20,7 +20,7 @@ public class GameScene extends Scene {
 	
 	private Random random;
 	
-	float timeSinceWave;
+	float timeSinceWave, timeSincePowerup;
 	
 	/**
 	 * 
@@ -88,6 +88,14 @@ public class GameScene extends Scene {
 			System.out.println("new wave");
 			addObject(new Wave(180, -15, random.nextInt(3) - 1, random.nextInt(3)));
 			timeSinceWave = 0;
+		}
+		
+		timeSincePowerup += dt;
+		
+		if (random.nextDouble() < timeSincePowerup * .005) {
+			int depth = random.nextInt(3) - 1;
+			addObject(new PowerUp(new Vector2(170, getOceanLevel(depth)), random.nextBoolean() ? PowerUp.Type.BARREL : PowerUp.Type.PLANK, depth));
+			timeSincePowerup = 0;
 		}
 	}
 	
