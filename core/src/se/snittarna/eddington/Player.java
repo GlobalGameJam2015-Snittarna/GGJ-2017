@@ -7,6 +7,9 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 public class Player extends GameObject {
+	private int currentAmmo;
+	
+	private float fireRate;
 	
 	private final int ACCELERATION = 200;
 	private final float X_DRAG = .08f;
@@ -34,6 +37,7 @@ public class Player extends GameObject {
 		super(new Vector2(), new Vector2(0.2f, 0.2f), new Animation(new Sprite(AssetManager.getTexture("boat"))));
 		velocity = new Vector2();
 		setState(State.BOAT);
+		currentAmmo = 5;
 	}
 	
 	public void setState(State state) {
@@ -48,10 +52,14 @@ public class Player extends GameObject {
 		/**
 		 * debug
 		 */
-		if (Gdx.input.isKeyJustPressed(Keys.SPACE)) {
-			//setState(State.SWIM);
-			//velocity.y += 5;
-			this.getScene().addObject(new Projectile(this.getPosition(), 0, 8));
+		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && fireRate <= 0 && currentAmmo > 0) {
+			this.getScene().addObject(new Projectile(this.getPosition(), -(float)Math.PI/2, 50));
+			currentAmmo -= 1;
+			fireRate = 10;
+		}
+		
+		if(fireRate > 0) {
+			fireRate -= 10 * dt;
 		}
 		
 		super.update(dt);
