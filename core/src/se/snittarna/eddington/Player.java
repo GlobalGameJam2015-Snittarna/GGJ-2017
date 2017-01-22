@@ -66,6 +66,11 @@ public class Player extends GameObject {
 			fireRate = 10;
 		}
 		
+		if(boatParts >= 3) {
+			setState(State.BOAT);
+			boatParts = 0;
+		}
+		
 		if(fireRate > 0) {
 			fireRate -= 10 * dt;
 		}
