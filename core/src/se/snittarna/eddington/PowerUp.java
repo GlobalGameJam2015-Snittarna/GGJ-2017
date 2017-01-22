@@ -34,7 +34,7 @@ public class PowerUp extends GameObject implements Depthable {
 		}
 		
 		setPosition(getPosition().add(new Vector2(-10 * dt, 0)));
-		System.out.println("powerup" + getPosition().x);
+		//System.out.println("powerup" + getPosition().x);
 		super.update(dt);
 	}
 	

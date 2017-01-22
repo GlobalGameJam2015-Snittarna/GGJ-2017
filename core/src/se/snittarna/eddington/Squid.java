@@ -21,17 +21,19 @@ public class Squid extends GameObject {
 	
 	private boolean hasAttackTeased;
 	
-	private ArrayList<SquidArm> arms = new ArrayList<SquidArm>();
+	private SquidArm[] arms;
 	
 	Random r = new Random();
 	
 	public Squid(Vector2 position) {
 		super(position, new Vector2(45,26), new Animation(new Sprite(AssetManager.getTexture("squid"))));
-		newArm();
-		maxAddNewArmCount = 100;
+		maxAddNewArmCount = 150;
 		maxLevelCount = 200;
 		maxAttackCount = 50;
 		attackIndex = -1;
+		
+		arms = new SquidArm[10];
+		newArm();
 	}
 
 	public void update(float dt) {
@@ -39,11 +41,29 @@ public class Squid extends GameObject {
 		levelCount += 10*dt;
 		attackCount += 10*dt;
 		
-		r = new Random();
-		
-		if(arms.size() > 0 && attackCount >= maxAttackCount) {
-			attackIndex = random(0, arms.size()-1);
+		if (attackCount >= maxAttackCount) {
+			attackIndex = random(0, arms.length);
 			attackCount = random(0, (int)maxAttackCount/2);
+			
+			int j = 0;
+			for (int i = attackIndex; i >= 0; i--) {
+				int bc = 0;
+				j++;
+				if (j >= arms.length) j = 0;
+				while (arms[j] == null) {
+					bc++;
+					j++;
+					if (j >= arms.length) {
+						j = 0;
+					}
+					if (bc >= arms.length) {
+						i = 0;
+						j = -1;
+						break;
+					}
+				}
+			}
+			if (j != -1) arms[j].startAttack();
 		}
 		
 		if(levelCount >= maxLevelCount) {
@@ -52,49 +72,69 @@ public class Squid extends GameObject {
 			levelCount = 0;
 		}
 		
-		if(addNewArmCount >= maxAddNewArmCount && arms.size()-1 <= level+2) {
+		if(addNewArmCount >= maxAddNewArmCount /*&& arms.size()-1 <= level+2*/) {
 			newArm();
 			addNewArmCount = 0;
 		}
 		
-		for(int i = 0; i < arms.size(); i++) {
-			arms.get(i).update(dt);
+		for(int i = 0; i < arms.length; i++) {
+			if (arms[i] == null) continue;
+			arms[i].update(dt);
 			for (GameObject g : getScene().getObjects()) {
 				if (g instanceof Projectile) {
-					if (g.getHitbox().collision(arms.get(i).getHitbox())) {
+					if (g.getHitbox().collision(arms[i].getHitbox())) {
 						getScene().removeObject(g);
-						arms.get(i).setDying();
+						arms[i].setDying();
 						GameScene.score += 5;
 					}
 				} else if (g instanceof Player) {
-					if(!arms.get(i).getDying() && g.getHitbox().collision(arms.get(i).getHitbox())) {
+					if(!arms[i].getDying() && g.getHitbox().collision(arms[i].getHitbox())) {
 						((Player) g).degrade();
 						GameScene.score -= 10;
-						arms.get(i).setDying();
+						arms[i].setDying();
 					}
 				}
 			}
-			if(arms.get(i).destroy) {
-				arms.remove(arms.get(i));
+			if(arms[i].destroy) {
+				arms[i] = null;
 			}
 		}
-		attack();
+		//attack();
 		super.update(dt);
 	}
 	
 	public void newArm() {
-		arms.add(new SquidArm(random((-330/2)+32, (330/2)), 0.1f));
-	}
-	
-	public void attack() {
-		if (attackIndex != -1) arms.get(attackIndex).startAttack();
-		attackIndex = -1;
+		int index = r.nextInt(arms.length);
+		System.out.println("new arm at " + index);
+		int fin = 0;
+		for (int i = 0; i < index; i++) {
+			System.out.println("counting up, fin = " + fin);
+			int bc = 0;
+			
+			fin++;
+			if (fin >= arms.length) fin = 0;
+			
+			while (arms[fin] != null) {
+				System.out.println(fin + " taken");
+				bc++;
+				fin++;
+				if (fin >= arms.length) {
+					fin = 0;
+				}
+				if (bc >= arms.length) {
+					System.out.println("no space");
+					return;
+				}
+			}
+		}
+		arms[fin] = new SquidArm(fin * 30 - 130, .1f);
 	}
 	
 	public void draw(SpriteBatch batch) {
 		super.draw(batch);
-		for(int i = 0; i < arms.size(); i++) {
-			arms.get(i).draw(batch);
+		for(int i = 0; i < arms.length; i++) {
+			if (arms[i] == null) continue;
+			arms[i].draw(batch);
 		}
 	}
 	

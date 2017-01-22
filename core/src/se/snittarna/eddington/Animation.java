@@ -39,7 +39,7 @@ public class Animation extends Sprite {
 	
 	public void animate(float dt) {
 		animationCount += 10 * dt;
-		System.out.println(currentFrame + ": ADSA");
+		//System.out.println(currentFrame + ": ADSA");
 		this.setRegion(frame(minFrame, this.getRegionWidth()) + currentFrame*this.getRegionWidth()+1+currentFrame, 
 				this.getRegionY(), this.getRegionWidth(), this.getRegionHeight());
 		if(animationCount > maxAnimationCount) {

@@ -35,8 +35,8 @@ public class GameScene extends Scene {
 		for (GameObject g : getObjects()) {
 			if (g instanceof Wave) {
 				float d = ((Wave)g).getHeightAt(x, depth);
-				System.out.println("wave, h = " + d);
-				System.out.println(getOceanLevel(depth));
+				//System.out.println("wave, h = " + d);
+				//System.out.println(getOceanLevel(depth));
 				if (d > dist) dist = d;
 			}
 		}
@@ -102,7 +102,7 @@ public class GameScene extends Scene {
 			}
 		}
 		
-		if (random.nextDouble() < timeSincePowerup * .001) {
+		if (random.nextDouble() < timeSincePowerup * .0015) {
 			int depth = random.nextInt(3) - 1;
 			addObject(new PowerUp(new Vector2(170, getOceanLevel(depth)), spawnBoatParts ? PowerUp.Type.BARREL : PowerUp.Type.PLANK, depth));
 			timeSincePowerup = 0;
