@@ -52,9 +52,9 @@ public class Player extends GameObject {
 		/**
 		 * debug
 		 */
-		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && fireRate <= 0 && currentAmmo > 0) {
+		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && fireRate <= 0 && currentAmmo >= 3) {
 			this.getScene().addObject(new Projectile(this.getPosition(), -(float)Math.PI/2, 50));
-			currentAmmo -= 1;
+			currentAmmo -= 3;
 			fireRate = 10;
 		}
 		
