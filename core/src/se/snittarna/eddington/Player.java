@@ -2,6 +2,7 @@ package se.snittarna.eddington;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -138,6 +139,12 @@ public class Player extends GameObject implements Depthable {
 			
 			if (Gdx.input.isKeyPressed(Keys.D) && getPosition().x < (330/2)-50 || getPosition().x < -145) {
 				velocity.x += ACCELERATION * dt;
+			}
+			
+			if (Math.abs(velocity.x) > 5) {
+				for (int i = 0; i < 10; i++) {
+					getScene().addObject(new Particle(velocity.x > 0 ? getPosition() : getPosition().add(new Vector2(getSize().x, 0)), new Vector2(- Math.signum(velocity.x) * (float)Math.cos(i * .1 + .3), (float) Math.sin(i * .1 + .1)).scl(Math.abs(velocity.x)), new Color(0x2B5575)));
+				}
 			}
 		}
 	}
