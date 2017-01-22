@@ -37,6 +37,11 @@ public class Animation extends Sprite {
 		return 1+frame+size*frame;
 	}
 	
+	public void setAnimation(int maxFrame, float maxAnimationCount) {
+		this.maxFrame = maxFrame;
+		this.maxAnimationCount = maxAnimationCount;
+	}
+	
 	public void animate(float dt) {
 		animationCount += 10 * dt;
 		//System.out.println(currentFrame + ": ADSA");

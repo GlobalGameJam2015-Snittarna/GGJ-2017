@@ -51,6 +51,8 @@ public class Player extends GameObject implements Depthable {
 	public void setState(State state) {
 		System.out.println("setting state");
 		this.state = state;
+		if(state == State.SWIM) getSprite().setAnimation(3, 3);
+		else getSprite().setAnimation(0, 0);
 		getSprite().setRegion(state.texture);
 		getSprite().setSize(state.size.x, state.size.y);
 	}
@@ -73,7 +75,7 @@ public class Player extends GameObject implements Depthable {
 			GameScene.score ++;
 			scoreCounter -= 1f;
 		}
-		
+		if(this.state == State.SWIM) getSprite().animate(dt);
 		/**
 		 * debug
 		 */
