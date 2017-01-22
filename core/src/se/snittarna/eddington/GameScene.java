@@ -20,6 +20,8 @@ public class GameScene extends Scene {
 	
 	public static int score = 0;
 	
+	public static boolean gameOver;
+	
 	private Random random;
 	
 	float timeSinceWave, timeSincePowerup;

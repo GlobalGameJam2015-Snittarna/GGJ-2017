@@ -20,7 +20,7 @@ public class Game extends ApplicationAdapter {
 	/**
 	 * the currently active scene being updated and drawn.
 	 */
-	private Scene currentScene;
+	public static Scene currentScene;
 	
 	
 	private OrthographicCamera uiCam;
@@ -35,9 +35,9 @@ public class Game extends ApplicationAdapter {
 	 * @see Scene#onLeave()
 	 * @see Scene#onResume()
 	 */
-	public void setCurrentScene(Scene currentScene) {
+	public static void setCurrentScene(Scene currentScene) {
 		currentScene.onLeave();
-		this.currentScene = currentScene;
+		Game.currentScene = currentScene;
 		currentScene.onResume();
 	}
 
@@ -49,7 +49,7 @@ public class Game extends ApplicationAdapter {
 		AssetManager.load();
 		
 		System.out.println(AssetManager.getTexture("test"));
-		currentScene = new GameScene();
+		currentScene = new StartScreen(); // new GameScene();
 		
 		uiCam = new OrthographicCamera(330, 180);
 	}
