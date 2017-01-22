@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Music.OnCompletionListener;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -100,7 +101,7 @@ public class GameScene extends Scene {
 	public void update(float dt) {
 		dt *= 1.8f;
 		super.update(dt);
-		
+		Game.checkHighscore(score);
 		if(gameOver) {
 			restartCounter += 5*dt;
 			
@@ -138,6 +139,13 @@ public class GameScene extends Scene {
 	
 	public void drawUi(SpriteBatch uiBatch) {
 		if(gameOver) AssetManager.font.draw(uiBatch, "GAME OVER", 0, 0);
+		if(score != Game.highscore) {
+			AssetManager.font.draw(uiBatch, "HIGHSCORE: " + Game.highscore, -50, 180/2);
+		} else {
+			AssetManager.font.setColor(Color.GOLD);
+			AssetManager.font.draw(uiBatch, "HIGHSCORE: " + Game.highscore, -50, 180/2);
+			AssetManager.font.setColor(Color.WHITE);
+		}
 		super.drawUi(uiBatch);
 	}
 	

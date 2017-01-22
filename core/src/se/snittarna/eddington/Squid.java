@@ -91,7 +91,6 @@ public class Squid extends GameObject {
 				} else if (g instanceof Player) {
 					if(!arms[i].getDying() && g.getHitbox().collision(arms[i].getHitbox())) {
 						((Player) g).degrade();
-						GameScene.score -= 10;
 						arms[i].setDying();
 					}
 				}

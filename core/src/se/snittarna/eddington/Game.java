@@ -22,6 +22,11 @@ public class Game extends ApplicationAdapter {
 	 */
 	public static Scene currentScene;
 	
+	public static int highscore = 15;
+	
+	public static void checkHighscore(int score) {
+		if(score > highscore) highscore = score;
+	}
 	
 	private OrthographicCamera uiCam;
 	

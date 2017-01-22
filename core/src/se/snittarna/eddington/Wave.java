@@ -34,7 +34,7 @@ public class Wave extends GameObject implements Depthable {
 	public Wave(float x, float speed, int step, int height) {
 		super(new Vector2(x, GameScene.getOceanLevel(step)), 
 				new Vector2(AssetManager.getTexture(("wave" + height)).getRegionWidth(), AssetManager.getTexture(("wave" + height)).getRegionHeight()), 
-				new Animation(new Sprite(AssetManager.getTexture(("wave" + height))), 2, 0, 3));
+				new Animation(new Sprite(AssetManager.getTexture(("wave" + height))), (height == 1) ? 2 : 1, 0, 3));
 		this.speed = speed;
 		this.tip = points[height];
 		this.step = step;
@@ -43,7 +43,7 @@ public class Wave extends GameObject implements Depthable {
 	
 	public void update(float dt) {
 		setPosition(getPosition().add(new Vector2(speed, 0).cpy().scl(dt)));
-		if(height == 1) getSprite().animate(dt);
+		getSprite().animate(dt);
 		super.update(dt);
 	}
 
