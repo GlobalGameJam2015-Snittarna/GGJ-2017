@@ -60,6 +60,10 @@ public class Player extends GameObject implements Depthable {
 		boatParts += 1;
 	}
 	
+	public boolean isBoat() {
+		return state == State.BOAT;
+	}
+	
 	public void update(float dt) {
 		/**
 		 * debug

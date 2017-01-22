@@ -92,9 +92,17 @@ public class GameScene extends Scene {
 		
 		timeSincePowerup += dt;
 		
+		boolean spawnBoatParts = false;
+		
+		for(GameObject g : getObjects()) {
+			if(g instanceof Player) {
+				spawnBoatParts = ((Player) g).isBoat();
+			}
+		}
+		
 		if (random.nextDouble() < timeSincePowerup * .005) {
 			int depth = random.nextInt(3) - 1;
-			addObject(new PowerUp(new Vector2(170, getOceanLevel(depth)), random.nextBoolean() ? PowerUp.Type.BARREL : PowerUp.Type.PLANK, depth));
+			addObject(new PowerUp(new Vector2(170, getOceanLevel(depth)), spawnBoatParts ? PowerUp.Type.BARREL : PowerUp.Type.PLANK, depth));
 			timeSincePowerup = 0;
 		}
 	}

@@ -22,7 +22,7 @@ public class SquidArm extends GameObject {
 	private boolean attacking;
 	
 	public SquidArm(float x, float extendSpeed) {
-		super(new Vector2(x, GameScene.getOceanLevel(3)), new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("hand"))));
+		super(new Vector2(x, GameScene.getOceanLevel(11)), new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("hand"))));
 		this.extendSpeed = extendSpeed;
 	}
 	
