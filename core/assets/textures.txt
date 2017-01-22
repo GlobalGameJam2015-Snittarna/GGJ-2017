@@ -10,7 +10,7 @@ hand,1,319,32,32
 squid,1,702,45,26
 background1,138,180,330,180
 mountain,1,731,147,154
-projectile,0,397,10,14
+projectile,1,397,10,14
 sea,1,413,330,25
 underwater,519,217,330,49
 barrel,1,687,10,14
