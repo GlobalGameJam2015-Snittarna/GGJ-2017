@@ -22,13 +22,18 @@ public class SquidArm extends GameObject {
 	public boolean destroy;
 	
 	public SquidArm(float x, float extendSpeed) {
-		super(new Vector2(x, GameScene.getOceanLevel(11)-120), new Vector2(19, 180), new Animation(new Sprite(AssetManager.getTexture("longHand"))));
+		super(new Vector2(x, GameScene.getOceanLevel(11)-180), new Vector2(19, 180), new Animation(new Sprite(AssetManager.getTexture("longHand"))));
 		this.extendSpeed = extendSpeed;
 	}
 	
 	public void update(float dt) {
 		if(!dying) {
-			if(!attacking) tease(dt);
+			if(!attacking) {
+				if(this.getPosition().cpy().y <= BASE_LEVEL-2) {
+					this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, BASE_LEVEL, 0.05f)));
+				} else 
+					tease(dt);
+			}
 			else attack(dt);
 		}
 		else {
@@ -72,6 +77,10 @@ public class SquidArm extends GameObject {
 	
 	public void setDying() {
 		dying = true;
+	}
+	
+	public boolean getDying() {
+		return dying;
 	}
 	
 	public boolean attackEnded() {

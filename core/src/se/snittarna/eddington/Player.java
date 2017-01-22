@@ -69,7 +69,7 @@ public class Player extends GameObject implements Depthable {
 		/**
 		 * debug
 		 */
-		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && fireRate <= 0 && currentAmmo >= 3) {
+		if (Gdx.input.isKeyJustPressed(Keys.SPACE) && fireRate <= 0 && currentAmmo >= 3 && state == State.BOAT) {
 			this.getScene().addObject(new Projectile(this.getPosition(), -(float)Math.PI/2, 50));
 			currentAmmo -= 3;
 			fireRate = 10;
@@ -129,6 +129,15 @@ public class Player extends GameObject implements Depthable {
 			if (Gdx.input.isKeyPressed(Keys.D)) {
 				velocity.x += ACCELERATION * dt;
 			}
+		}
+	}
+	
+	public void degrade() {
+		if(state == State.BOAT) {
+			setState(State.SWIM);
+			currentAmmo = 0;
+		} else {
+			getScene().removeObject(this);
 		}
 	}
 	

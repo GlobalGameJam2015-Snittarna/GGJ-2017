@@ -66,8 +66,9 @@ public class Squid extends GameObject {
 						arms.get(i).setDying();
 					}
 				} else if(g instanceof Player) {
-					if(g.getHitbox().collision(arms.get(i).getHitbox())) {
-						getScene().removeObject(g);
+					if(!arms.get(i).getDying() && g.getHitbox().collision(arms.get(i).getHitbox())) {
+						((Player) g).degrade();
+						arms.get(i).setDying();
 					}
 				}
 			}
