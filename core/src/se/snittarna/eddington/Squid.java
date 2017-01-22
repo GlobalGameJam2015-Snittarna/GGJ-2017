@@ -80,7 +80,7 @@ public class Squid extends GameObject {
 	}
 	
 	public void newArm() {
-		arms.add(new SquidArm(random((-330/2)+32, (330/2)-32), 0.1f));
+		arms.add(new SquidArm(random((-330/2), (330/2)), 0.1f));
 	}
 	
 	public void attack() {

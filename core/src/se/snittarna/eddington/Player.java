@@ -3,6 +3,7 @@ package se.snittarna.eddington;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
@@ -129,5 +130,10 @@ public class Player extends GameObject implements Depthable {
 				velocity.x += ACCELERATION * dt;
 			}
 		}
+	}
+	
+	public void drawUi(SpriteBatch batch) {
+		AssetManager.font.draw(batch, "Ammo: " + (currentAmmo/3), 100, 100);
+		super.drawUi(batch);
 	}
 }

@@ -7,12 +7,14 @@ import java.util.Scanner;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 public class AssetManager {
 	/**
 	 * loads the spritesheet (assets/spritesheet.png) and the list of textures (assets/textures.txt)
 	 */
+	public static BitmapFont font = new BitmapFont();
 	public static void load() {
 		textureRegions = new HashMap<String, TextureRegion>();
 		spriteSheet = new Texture("spritesheet.png");
