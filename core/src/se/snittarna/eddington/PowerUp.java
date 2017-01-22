@@ -12,6 +12,22 @@ public class PowerUp extends GameObject {
 		super(position, new Vector2(32, 32),  new Animation(new Sprite(AssetManager.getTexture(getImageName(type)))));
 	}
 	
+	public void update(float dt) {
+		for (GameObject g : getScene().getObjects()) {
+			if (g instanceof Player) {
+				if(g.getHitbox().collision(getHitbox())) {
+					if(type == Type.BARREL) {
+						((Player) g).addAmmo();
+					} else {
+						((Player) g).addBoatParts();
+					}
+					getScene().removeObject(this);
+				}
+			}
+		}
+		super.update(dt);
+	}
+	
 	public static String getImageName(Type type) {
 		return (type == Type.BARREL) ? "barrel" : "bomb";
 	}

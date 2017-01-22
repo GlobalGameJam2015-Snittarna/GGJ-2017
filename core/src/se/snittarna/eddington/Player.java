@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Player extends GameObject {
 	private int currentAmmo;
+	private int boatParts;
 	
 	private float fireRate;
 	
@@ -46,7 +47,14 @@ public class Player extends GameObject {
 		getSprite().setRegion(state.texture);
 		getSprite().setSize(state.size.x, state.size.y);
 	}
-
+	
+	public void addAmmo() {
+		currentAmmo += 1;
+	}
+	
+	public void addBoatParts() {
+		boatParts += 1;
+	}
 	
 	public void update(float dt) {
 		/**
