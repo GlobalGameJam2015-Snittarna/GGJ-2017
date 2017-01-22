@@ -29,6 +29,7 @@ public class PowerUp extends GameObject implements Depthable {
 						if(!((Player)g).isBoat()) ((Player) g).addBoatParts();
 					}
 					getScene().removeObject(this);
+					AssetManager.getSound("Item pickup").play();
 				}
 			}
 		}
