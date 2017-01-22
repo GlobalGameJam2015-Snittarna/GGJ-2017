@@ -1,7 +1,10 @@
 package se.snittarna.eddington;
 
+import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Music.OnCompletionListener;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
@@ -9,7 +12,7 @@ public class GameScene extends Scene {
 	
 	public static final float OCEAN_LEVEL = -30;
 	public static final float DEPTH_STEP = 5;
-	public static final float GRAVITY = -30;
+	public static final float GRAVITY = -45;
 	
 	/**
 	 * 
@@ -40,12 +43,12 @@ public class GameScene extends Scene {
 	
 	public GameScene() {
 		super();
-		addObject(new Background("background", 10, -1));
-		addObject(new Background("background", 10, 1));
-		addObject(new Background("mountain", 10, -1));
-		addObject(new Background("mountain", 10, 1));
-		addObject(new Background("background1", 5f, -1));
-		addObject(new Background("background1", 5f, 1));
+		addObject(new Background("background", 5, -1));
+		addObject(new Background("background", 5, 1));
+		addObject(new Background("mountain", 5, -1));
+		addObject(new Background("mountain", 5, 1));
+		addObject(new Background("background1", 10f, -1));
+		addObject(new Background("background1", 10f, 1));
 		addObject(new Underwater());
 		addObject(new Ocean());
 		Player p = new Player();
@@ -54,6 +57,18 @@ public class GameScene extends Scene {
 		addObject(new Squid(new Vector2(-170, 0)));
 		//getCamera().setFollow(p, 6, 3);
 		addObject(p);
+		
+		Music m = Gdx.audio.newMusic(Gdx.files.internal("music/song-intro.mp3"));
+		m.setOnCompletionListener(new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(Music music) {
+				Music m2 = Gdx.audio.newMusic(Gdx.files.internal("music/song-loop.mp3"));
+				m2.setLooping(true);
+				m2.play();
+			}
+		});
+		m.play();
 	}
 	
 	public void update(float dt) {
