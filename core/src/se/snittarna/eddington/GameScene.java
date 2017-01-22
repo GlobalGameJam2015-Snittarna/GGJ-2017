@@ -104,7 +104,7 @@ public class GameScene extends Scene {
 			}
 		}
 		
-		if (random.nextDouble() < timeSincePowerup * .0015) {
+		if (random.nextDouble() < timeSincePowerup * .0025) {
 			int depth = random.nextInt(3) - 1;
 			addObject(new PowerUp(new Vector2(170, getOceanLevel(depth)), spawnBoatParts ? PowerUp.Type.BARREL : PowerUp.Type.PLANK, depth));
 			timeSincePowerup = 0;

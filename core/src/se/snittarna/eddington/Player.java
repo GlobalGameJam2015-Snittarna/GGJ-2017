@@ -150,8 +150,14 @@ public class Player extends GameObject implements Depthable {
 	}
 	
 	public void drawUi(SpriteBatch batch) {
-		AssetManager.font.draw(batch, "Ammo: " + (currentAmmo/3), -150, 0);
-		AssetManager.font.draw(batch, "Score: " + GameScene.score, -150, -20);
+		if (state == State.BOAT) {
+			AssetManager.font.draw(batch, "x" + (currentAmmo/3), -135, 60);
+			batch.draw(AssetManager.getTexture("projectile"), -150, 46, 10, 14);
+		} else {
+			AssetManager.font.draw(batch, boatParts + "/3", -135, 60);
+			batch.draw(AssetManager.getTexture("plank"), -150, 50, 14, 10);
+		}
+		AssetManager.font.draw(batch, "Score: " + GameScene.score, -150, 80);
 		super.drawUi(batch);
 	}
 }
