@@ -1,5 +1,9 @@
 package se.snittarna.eddington;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Random;
+
 import com.badlogic.gdx.Audio;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -11,8 +15,12 @@ import com.badlogic.gdx.math.Vector2;
 public class GameScene extends Scene {
 	
 	public static final float OCEAN_LEVEL = -30;
-	public static final float DEPTH_STEP = 5;
+	public static final float DEPTH_STEP = 8;
 	public static final float GRAVITY = -45;
+	
+	private Random random;
+	
+	float timeSinceWave;
 	
 	/**
 	 * 
@@ -52,11 +60,11 @@ public class GameScene extends Scene {
 		addObject(new Underwater());
 		addObject(new Ocean());
 		Player p = new Player();
-		addObject(new Wave(0, 1, 0, 2));
-		addObject(new Wave(-6, -1, 0, 1));
 		addObject(new Squid(new Vector2(-170, 0)));
 		//getCamera().setFollow(p, 6, 3);
 		addObject(p);
+		
+		random = new Random();
 		
 		Music m = Gdx.audio.newMusic(Gdx.files.internal("music/song-intro.mp3"));
 		m.setOnCompletionListener(new OnCompletionListener() {
@@ -73,10 +81,43 @@ public class GameScene extends Scene {
 	
 	public void update(float dt) {
 		super.update(dt);
+		
+		timeSinceWave += dt;
+		
+		if (random.nextDouble() < timeSinceWave * .001) {
+			System.out.println("new wave");
+			addObject(new Wave(180, -15, random.nextInt(3) - 1, random.nextInt(3)));
+			timeSinceWave = 0;
+		}
 	}
 	
 	public void drawGame(SpriteBatch batch) {
 		batch.draw(AssetManager.getTexture("ocean"), -8, getOceanLevel(-1), 16, -9);
-		super.drawGame(batch);
+		
+		ArrayList<GameObject> toSort = new ArrayList<GameObject>();
+		
+		for (GameObject g : getObjects()) {
+			if (!(g instanceof Depthable)) {
+				g.draw(batch);
+			} else {
+				toSort.add(g);
+			}
+		}
+		
+		toSort.sort(new Comparator<GameObject>() {
+			
+			@Override
+			public int compare(GameObject o1, GameObject o2) {
+				if (((Depthable)o1).getDepth() == ((Depthable)o2).getDepth()) {
+					if (o1 instanceof Player) return 1;
+					if (o2 instanceof Player) return -1;
+				}
+				return ((Depthable)o1).getDepth() - ((Depthable)o2).getDepth();
+			}
+		});
+		
+		for (GameObject g : toSort) {
+			g.draw(batch);
+		}
 	}
 }

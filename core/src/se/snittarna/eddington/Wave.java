@@ -5,12 +5,16 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
-public class Wave extends GameObject {
+public class Wave extends GameObject implements Depthable {
 	private static final Vector2[] points = new Vector2[] {
 		new Vector2(43, 24),
 		new Vector2(40, 31),
 		new Vector2(50, 51)
 	};	
+	
+	public int getDepth() {
+		return step;
+	}
 	
 	private int step;
 	private int height;
@@ -33,6 +37,7 @@ public class Wave extends GameObject {
 				new Animation(new Sprite(AssetManager.getTexture(("wave" + height)))));
 		this.speed = speed;
 		this.tip = points[height];
+		this.step = step;
 	}
 	
 	public void update(float dt) {

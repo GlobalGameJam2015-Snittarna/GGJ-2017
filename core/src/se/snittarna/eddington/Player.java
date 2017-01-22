@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
-public class Player extends GameObject {
+public class Player extends GameObject implements Depthable {
 	private int currentAmmo;
 	
 	private float fireRate;
@@ -15,6 +15,10 @@ public class Player extends GameObject {
 	private final float X_DRAG = .08f;
 	private final float Y_DRAG = .3f;
 	private final float BOUYANCY = 30f;
+	
+	public int getDepth() {
+		return step;
+	}
 	
 	public enum State {
 		BOAT ("boat", new Vector2(18, 10)),
