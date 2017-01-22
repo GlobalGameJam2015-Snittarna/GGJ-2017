@@ -11,7 +11,10 @@ import com.badlogic.gdx.math.Vector2;
 public class Squid extends GameObject {
 	private float attackCount;
 	private float maxAttackCount;
+	private float levelCount;
 	private float maxLevelCount;
+	private float addNewArmCount;
+	private float maxAddNewArmCount;
 	
 	private int attackIndex;
 	private int level;
@@ -22,11 +25,26 @@ public class Squid extends GameObject {
 	
 	public Squid(Vector2 position) {
 		super(position, new Vector2(32, 32), new Animation(new Sprite(AssetManager.getTexture("squid"))));
-		arms.add(new SquidArm(random((-330/2)+32, (330/2)-32), 0.1f));
-		attackIndex = -1;
+		newArm();
+		maxAddNewArmCount = 100;
+		maxLevelCount = 200;
+		attackIndex = 0;
 	}
 
 	public void update(float dt) {
+		addNewArmCount += 10*dt;
+		levelCount += 10*dt;
+		
+		if(levelCount >= maxLevelCount) {
+			maxAddNewArmCount -= 10;
+			levelCount = 0;
+		}
+		
+		if(addNewArmCount >= maxAddNewArmCount) {
+			newArm();
+			addNewArmCount = 0;
+		}
+		
 		for(int i = 0; i < arms.size(); i++) {
 			arms.get(i).update(dt);
 			for (GameObject g : getScene().getObjects()) {
@@ -40,6 +58,10 @@ public class Squid extends GameObject {
 		}
 		attack();
 		super.update(dt);
+	}
+	
+	public void newArm() {
+		arms.add(new SquidArm(random((-330/2)+32, (330/2)-32), 0.1f));
 	}
 	
 	public void attack() {
