@@ -130,11 +130,11 @@ public class Player extends GameObject implements Depthable {
 			/** 
 			 * move left and right
 			 */
-			if (Gdx.input.isKeyPressed(Keys.A)) {
+			if (Gdx.input.isKeyPressed(Keys.A) && getPosition().x > (-330/2)+20) {
 				velocity.x -= ACCELERATION * dt;
 			}
 			
-			if (Gdx.input.isKeyPressed(Keys.D)) {
+			if (Gdx.input.isKeyPressed(Keys.D) && getPosition().x < (330/2)-20) {
 				velocity.x += ACCELERATION * dt;
 			}
 		}
@@ -146,6 +146,7 @@ public class Player extends GameObject implements Depthable {
 			currentAmmo = 0;
 		} else {
 			getScene().removeObject(this);
+			GameScene.gameOver = true;
 		}
 	}
 	
