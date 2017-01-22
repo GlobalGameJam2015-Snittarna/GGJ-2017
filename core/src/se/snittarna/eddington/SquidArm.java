@@ -6,29 +6,35 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
 public class SquidArm extends GameObject {
-	private int health;
-	
 	private float currentLevel;
 	private float extendSpeed;
 	private float waveCount;
 	private float endAttackCount;
 	
-	private final float BASE_LEVEL = GameScene.getOceanLevel(11)-140;
+	private final float BASE_LEVEL = GameScene.getOceanLevel(11)-120;
 	private final float MAX_EXTENSION = GameScene.getOceanLevel(8);
 	
 	private Sprite arm;
 	
 	private boolean goUp;
 	private boolean attacking;
+	private boolean dying;
+	public boolean destroy;
 	
 	public SquidArm(float x, float extendSpeed) {
-		super(new Vector2(x, GameScene.getOceanLevel(11)-140), new Vector2(19, 180), new Animation(new Sprite(AssetManager.getTexture("longHand"))));
+		super(new Vector2(x, GameScene.getOceanLevel(11)-120), new Vector2(19, 180), new Animation(new Sprite(AssetManager.getTexture("longHand"))));
 		this.extendSpeed = extendSpeed;
 	}
 	
 	public void update(float dt) {
-		if(!attacking) tease(dt);
-		else attack(dt);
+		if(!dying) {
+			if(!attacking) tease(dt);
+			else attack(dt);
+		}
+		else {
+			this.setPosition(new Vector2(this.getPosition().cpy().x, MathUtils.lerp(this.getPosition().cpy().y, -300, 0.04f)));
+			if(this.getPosition().cpy().y <= -300+5.5f) destroy = true;
+		}
 		super.update(dt);
 	}
 	
@@ -61,6 +67,10 @@ public class SquidArm extends GameObject {
 			attacking = true;
 			endAttackCount = 10;
 		}
+	}
+	
+	public void setDying() {
+		dying = true;
 	}
 	
 	public boolean attackEnded() {

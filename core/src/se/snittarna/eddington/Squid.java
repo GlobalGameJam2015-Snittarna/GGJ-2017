@@ -28,12 +28,19 @@ public class Squid extends GameObject {
 		newArm();
 		maxAddNewArmCount = 100;
 		maxLevelCount = 200;
-		attackIndex = 0;
+		maxAttackCount = 50;
+		attackIndex = -1;
 	}
 
 	public void update(float dt) {
 		addNewArmCount += 10*dt;
 		levelCount += 10*dt;
+		attackCount += 10*dt;
+		
+		if(arms.size() > 0 && attackCount >= maxAttackCount) {
+			attackIndex = random(0, arms.size()-1);
+			attackCount = random(0, (int)maxAttackCount/2);
+		}
 		
 		if(levelCount >= maxLevelCount) {
 			maxAddNewArmCount -= 10;
@@ -51,9 +58,16 @@ public class Squid extends GameObject {
 				if (g instanceof Projectile) {
 					if(g.getHitbox().collision(arms.get(i).getHitbox())) {
 						getScene().removeObject(g);
-						arms.remove(arms.get(i));
+						arms.get(i).setDying();
+					}
+				} else if(g instanceof Player) {
+					if(g.getHitbox().collision(arms.get(i).getHitbox())) {
+						getScene().removeObject(g);
 					}
 				}
+			}
+			if(arms.get(i).destroy) {
+				arms.remove(arms.get(i));
 			}
 		}
 		attack();
