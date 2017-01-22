@@ -28,6 +28,8 @@ public class GameScene extends Scene {
 	
 	float timeSinceWave, timeSincePowerup;
 	
+	private Music music;
+	
 	/**
 	 * 
 	 * @param x
@@ -73,24 +75,34 @@ public class GameScene extends Scene {
 		
 		random = new Random();
 		
-		Music m = Gdx.audio.newMusic(Gdx.files.internal("music/song-intro.mp3"));
-		m.setOnCompletionListener(new OnCompletionListener() {
+		music = Gdx.audio.newMusic(Gdx.files.internal("music/song-intro.mp3"));
+		music.setOnCompletionListener(new OnCompletionListener() {
 			
 			@Override
-			public void onCompletion(Music music) {
-				Music m2 = Gdx.audio.newMusic(Gdx.files.internal("music/song-loop.mp3"));
-				m2.setLooping(true);
-				m2.play();
+			public void onCompletion(Music m) {
+				music = Gdx.audio.newMusic(Gdx.files.internal("music/song-loop.mp3"));
+				music.setLooping(true);
+				music.play();
 			}
 		});
-		m.play();
+		music.play();
+	}
+	
+	public void onLeave() {
+		System.out.println("stopping music 1");
+		if (music != null) {
+			System.out.println("stopping music");
+			music.setLooping(false);
+			music.stop();
+		}
 	}
 	
 	public void update(float dt) {
+		dt *= 1.8f;
 		super.update(dt);
 		
 		if(gameOver) {
-			restartCounter += 10*dt;
+			restartCounter += 5*dt;
 			
 			if(restartCounter >= 20) {
 				Game.setCurrentScene(new StartScreen());

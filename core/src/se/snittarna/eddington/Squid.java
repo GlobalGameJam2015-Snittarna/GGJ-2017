@@ -86,6 +86,7 @@ public class Squid extends GameObject {
 						getScene().removeObject(g);
 						arms[i].setDying();
 						GameScene.score += 5;
+						AssetManager.getSound("Fiende ow").play();
 					}
 				} else if (g instanceof Player) {
 					if(!arms[i].getDying() && g.getHitbox().collision(arms[i].getHitbox())) {

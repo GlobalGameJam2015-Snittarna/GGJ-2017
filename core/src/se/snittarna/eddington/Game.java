@@ -35,9 +35,9 @@ public class Game extends ApplicationAdapter {
 	 * @see Scene#onLeave()
 	 * @see Scene#onResume()
 	 */
-	public static void setCurrentScene(Scene currentScene) {
+	public static void setCurrentScene(Scene newScene) {
 		currentScene.onLeave();
-		Game.currentScene = currentScene;
+		Game.currentScene = newScene;
 		currentScene.onResume();
 	}
 
