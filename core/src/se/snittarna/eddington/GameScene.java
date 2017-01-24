@@ -74,6 +74,8 @@ public class GameScene extends Scene {
 		//getCamera().setFollow(p, 6, 3);
 		addObject(p);
 		
+		score = 0;
+		
 		random = new Random();
 		
 		music = Gdx.audio.newMusic(Gdx.files.internal("music/song-intro.mp3"));

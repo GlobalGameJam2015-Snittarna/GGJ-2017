@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
-public class Squid extends GameObject {
+public class Squid extends GameObject implements Depthable {
 	private float attackCount;
 	private float maxAttackCount;
 	private float levelCount;
@@ -24,6 +24,10 @@ public class Squid extends GameObject {
 	private SquidArm[] arms;
 	
 	Random r = new Random();
+	
+	public int getDepth() {
+		return 2;
+	}
 	
 	public Squid(Vector2 position) {
 		super(position, new Vector2(45,26), new Animation(new Sprite(AssetManager.getTexture("squid"))));
